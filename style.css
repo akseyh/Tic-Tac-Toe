@@ -1,0 +1,166 @@
+* {margin:0; padding: 0;}
+
+/* font-awesome */
+.fa-circle {
+    color: rgb(29, 75, 160);
+    font-size: 6vh;
+    text-align: center;
+    line-height: 3;
+}
+.fa-times {
+    color:darkcyan;
+    font-size: 7vh;
+    text-align: center;
+}
+
+#app {
+    width:100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ust kisim */
+#ustKisim {
+    width: 100%;
+    height:25%;
+    display: flex;
+    font-size: 40px;
+    text-align: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.ustKisim--item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ustKisim--item:first-child {
+    margin-right: 10vh;
+}
+.ustKisim--item:last-child {
+    margin-left: 10vh;
+}
+@media (max-width: 480px) { 
+    .ustKisim--item:first-child {
+        margin-right: 5vh;
+    }
+    .ustKisim--item:last-child {
+        margin-left: 5vh;
+    }
+} 
+
+
+/* Oyun alani baslangic */
+#oyun {
+    width: 100%;
+    height:50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.oyunAlani {
+    width: 15vh;
+    height: 15vh;
+    text-align: center;
+    line-height: 100px;
+}
+@media (max-width: 480px) { 
+    .oyunAlani  {
+        width: 13vh;
+        height: 13vh;
+    }
+}
+
+.oyunSatir {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+/* Oyun Alani bitis  */
+
+/* Alt kisim */
+#altKisim {
+    width: 100%;
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.altKisim--item {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+@media (max-width: 480px) { 
+    .altKisim--item {
+        width: 60%;
+    }
+}
+
+/* New Checkbox */
+#kutu {
+    width:150px;
+    height:50px;
+    border-radius: 50px;
+    background: aqua;
+    align-self: center;
+}
+
+#cerceve {
+    width: 50px;
+    height: 50px;
+    background:transparent;
+    border: 5px solid slategrey;
+    border-top:10px solid rgb(102, 116, 131);
+    border-bottom:10px solid rgb(102, 116, 131);
+    border-radius: 5px;
+    position: relative;
+    bottom: 60px;
+    left: 15px;
+    z-index: 1;
+    transition: all 0.5;
+}
+@media (max-width: 480px) { 
+    #kutu {
+        width: 150px;
+        height: 60px;
+    }
+
+    #cerceve {
+        width: 50px;
+        height: 60px;
+        left: 20px;
+    }
+}
+
+#restart {
+    position: relative;
+    left: 50px; 
+}
+#settings {
+    position: relative;
+    right: 50px;
+}
+@media (max-width: 1080px) { 
+    #restart {
+        left: -25px;
+    }
+    #settings {
+        left: 25px;
+    }
+}
+
+
+/* borders */
+#bir, #iki, #uc, #dort, #bes, #alti { border-bottom: 1px solid brown; }
+#bir, #dort, #yedi, #iki, #bes, #sekiz { border-right: 1px solid brown; }
