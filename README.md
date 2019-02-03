@@ -1,2 +1,2 @@
 # tic-tac-toe-w-JS
-Simple tic-tac-toe game developed wıth JS.
+Simple tic-tac-toe game developed with JS.
