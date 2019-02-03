@@ -1,5 +1,6 @@
+
 var oyun = {
-    sira: '',
+    sira: 'X',
     hareket: 0,
     karakter: ['X','O']
 }
@@ -7,15 +8,10 @@ var oyun = {
 
 
 function tikla(alan){
-    oyun.sira = oyun.karakter[oyun.hareket%2];
-    oyun.hareket++;
-    if(oyun.sira === 'X'){
-        document.getElementById(alan).className = "oyunAlani fa fa-times";
-        document.getElementById("cerceve").style = "left:75px;";
-    }
-    else if(oyun.sira === 'O'){
-        document.getElementById(alan).className = "oyunAlani far fa-circle";
-        document.getElementById("cerceve").style = "left:13px";
+    if( document.getElementById(alan).innerHTML == "" ){
+        document.getElementById(alan).innerHTML = oyun.sira;
+        oyun.hareket++;
+        oyun.sira = oyun.karakter[oyun.hareket%2];
     }
     kontrol();
 } 
@@ -25,67 +21,67 @@ let elemanlar = [];
 function kontrol(){
     
     for( let x=0; x<3; x++ ){
-        elemanlar[x] = document.getElementsByClassName("oyunSatir").item(0).children[x].className ;
+        elemanlar[x] = document.getElementsByClassName("oyunSatir").item(0).children[x].innerHTML ;
     }
     for( let y=0; y<3; y++ ){
-        elemanlar[y+3] = document.getElementsByClassName("oyunSatir").item(1).children[y].className;
+        elemanlar[y+3] = document.getElementsByClassName("oyunSatir").item(1).children[y].innerHTML;
     }
     for( let z=0; z<3; z++ ){
-        elemanlar[z+6] = document.getElementsByClassName("oyunSatir").item(2).children[z].className;
+        elemanlar[z+6] = document.getElementsByClassName("oyunSatir").item(2).children[z].innerHTML;
     }
     kazanan();
 }
 
 function kazanan(){
     if(
-        elemanlar[0] == elemanlar[1] && elemanlar[1] == elemanlar[2] && elemanlar[0] != "oyunAlani" && elemanlar[1] != "oyunAlani" && elemanlar[2] != "oyunAlani"
+        elemanlar[0] == elemanlar[1] && elemanlar[1] == elemanlar[2] && elemanlar[0] != ""
     ) {
         fisek();
     }
-    if(
-        elemanlar[3] == elemanlar[4] && elemanlar[4] == elemanlar[5] && elemanlar[3] != "oyunAlani" && elemanlar[4] != "oyunAlani" && elemanlar[5] != "oyunAlani"
+    else if(
+        elemanlar[3] == elemanlar[4] && elemanlar[4] == elemanlar[5] && elemanlar[3] != ""
     ) {
         fisek();
     }
-    if(
-        elemanlar[6] == elemanlar[7] && elemanlar[7] == elemanlar[8] && elemanlar[6] != "oyunAlani" && elemanlar[7] != "oyunAlani" && elemanlar[8] != "oyunAlani"
+    else if(
+        elemanlar[6] == elemanlar[7] && elemanlar[7] == elemanlar[8] && elemanlar[6] != ""
     ) {
         console.log(elemanlar[6]);
         fisek();
     }
-    if(
-        elemanlar[0] == elemanlar[4] && elemanlar[4] == elemanlar[8] && elemanlar[0] != "oyunAlani" && elemanlar[4] != "oyunAlani" && elemanlar[8] != "oyunAlani"
+    else if(
+        elemanlar[0] == elemanlar[4] && elemanlar[4] == elemanlar[8] && elemanlar[0] != ""
     ) {
         fisek();
     }
-    if(
-        elemanlar[2] == elemanlar[4] && elemanlar[4] == elemanlar[6] && elemanlar[2] != "oyunAlani" && elemanlar[4] != "oyunAlani" && elemanlar[6] != "oyunAlani"
+    else if(
+        elemanlar[2] == elemanlar[4] && elemanlar[4] == elemanlar[6] && elemanlar[2] != ""
     ) {
         fisek();
     }
-    if(
-        elemanlar[0] == elemanlar[3] && elemanlar[3] == elemanlar[6] && elemanlar[0] != "oyunAlani" && elemanlar[3] != "oyunAlani" && elemanlar[6] != "oyunAlani"
+    else if(
+        elemanlar[0] == elemanlar[3] && elemanlar[3] == elemanlar[6] && elemanlar[0] != ""
     ) {
         fisek();
     }
-    if(
-        elemanlar[1] == elemanlar[4] && elemanlar[4] == elemanlar[7] && elemanlar[1] != "oyunAlani" && elemanlar[4] != "oyunAlani" && elemanlar[7] != "oyunAlani"
+    else if(
+        elemanlar[1] == elemanlar[4] && elemanlar[4] == elemanlar[7] && elemanlar[1] != ""
     ) {
         fisek();
     }
-    if(
-        elemanlar[2] == elemanlar[5] && elemanlar[5] == elemanlar[8] && elemanlar[2] != "oyunAlani" && elemanlar[5] != "oyunAlani" && elemanlar[8] != "oyunAlani"
+    else if(
+        elemanlar[2] == elemanlar[5] && elemanlar[5] == elemanlar[8] && elemanlar[2] != ""
     ) {
         fisek();
     }
-    if(
-        elemanlar[0] != "oyunAlani" && elemanlar[1] != "oyunAlani" && elemanlar[2] != "oyunAlani" && elemanlar[3] != "oyunAlani" && elemanlar[4] != "oyunAlani" && elemanlar[5] != "oyunAlani" && elemanlar[6] != "oyunAlani" && elemanlar[7] != "oyunAlani" && elemanlar[8] != "oyunAlani"
+    else if(
+        oyun.hareket == 9
     ) berabere();
 }
 
-function fisek(a){
-    console.log("KAZANDIN!");
+function fisek(){
+    window.alert("KAZANDIN!");
 }
 function berabere(){
-    console.log("BERABERE!");
+    window.alert("BERABERE!");
 }
