@@ -28,17 +28,23 @@ function kontrol(){
 }
 
 function kazanan(){
-    if(
-        (elemanlar[0] == elemanlar[1] && elemanlar[1] == elemanlar[2] && elemanlar[0] != "") ||
-        (elemanlar[3] == elemanlar[4] && elemanlar[4] == elemanlar[5] && elemanlar[3] != "") ||
-        (elemanlar[6] == elemanlar[7] && elemanlar[7] == elemanlar[8] && elemanlar[6] != "") ||
-        (elemanlar[0] == elemanlar[4] && elemanlar[4] == elemanlar[8] && elemanlar[0] != "") ||
-        (elemanlar[2] == elemanlar[4] && elemanlar[4] == elemanlar[6] && elemanlar[2] != "") ||
-        (elemanlar[0] == elemanlar[3] && elemanlar[3] == elemanlar[6] && elemanlar[0] != "") ||
-        (elemanlar[1] == elemanlar[4] && elemanlar[4] == elemanlar[7] && elemanlar[1] != "") ||
-        (elemanlar[2] == elemanlar[5] && elemanlar[5] == elemanlar[8] && elemanlar[2] != "")
-    ) fisek();
-    else if( oyun.hareket == 9 ) berabere();
+    let kontrol =   [
+                        [0,1,2],
+                        [3,4,5],
+                        [6,7,8],
+                        [0,4,8],
+                        [2,4,6],
+                        [0,3,6],
+                        [1,4,7],
+                        [2,5,8]
+                    ]
+    for(let i=0; i<8; i++){
+        if(    elemanlar[kontrol[i][0]] == elemanlar[kontrol[i][1]] 
+            && elemanlar[kontrol[i][1]] == elemanlar[kontrol[i][2]] 
+            && elemanlar[kontrol[i][0]] != "" )
+                fisek();
+    }
+    if(oyun.hareket == 9) berabere();
 }
 
 function sifirla(){
