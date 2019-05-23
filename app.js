@@ -41,10 +41,17 @@ function kazanan(){
     for(let i=0; i<8; i++){
         if(    elemanlar[kontrol[i][0]] == elemanlar[kontrol[i][1]] 
             && elemanlar[kontrol[i][1]] == elemanlar[kontrol[i][2]] 
-            && elemanlar[kontrol[i][0]] != "" )
+            && elemanlar[kontrol[i][0]] != "" ){
                 fisek();
+                console.log("win");
+            }
     }
-    if(oyun.hareket == 9) berabere();
+    console.log("not win");
+    console.log("hareket: " + oyun.hareket);
+    if(oyun.hareket == 9){
+        berabere();
+        console.log("draw");
+    } 
 }
 
 function sifirla(){
