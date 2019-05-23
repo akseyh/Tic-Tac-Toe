@@ -50,12 +50,10 @@ function kazanan(){
 function sifirla(){
     for( let x=0; x<9; x++ )
         elemanlar[x] = "";
-    for( let x=0; x<3; x++ )
-        document.getElementsByClassName("oyunSatir").item(0).children[x].innerHTML = "";
-    for( let y=0; y<3; y++ )
-        document.getElementsByClassName("oyunSatir").item(1).children[y].innerHTML = "";
-    for( let z=0; z<3; z++ )
-        document.getElementsByClassName("oyunSatir").item(2).children[z].innerHTML = "";
+    for( let x=0; x<3; x++ ){
+        for( let y=0; y<3; y++ )
+            document.getElementsByClassName("oyunSatir").item(x).children[y].innerHTML = "";
+    }
 
     oyun.hareket = 0;
     oyun.sira = 'X'
@@ -74,5 +72,4 @@ function berabere(){
     oyun.draws++;
     sifirla();
     document.getElementById("draws").innerHTML = oyun.draws + " draws";
-
 }
