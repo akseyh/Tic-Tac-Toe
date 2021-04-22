@@ -1,82 +1,85 @@
-var oyun = {
-    sira: 'X',
-    hareket: 0,
-    karakter: ['X','O'],
-    x: 0,
-    o: 0,
-    draws: 0
-}
-
-function tikla(alan){
-    if( document.getElementById(alan).innerHTML == "" ){
-        document.getElementById(alan).innerHTML = oyun.sira;
-        oyun.hareket++;
-        oyun.sira = oyun.karakter[oyun.hareket%2];
-    }
-    kontrol();
-} 
-
-let elemanlar = [];
-function kontrol(){
-    for( let x=0; x<3; x++ )
-        elemanlar[x] = document.getElementsByClassName("oyunSatir").item(0).children[x].innerHTML ;
-    for( let y=0; y<3; y++ )
-        elemanlar[y+3] = document.getElementsByClassName("oyunSatir").item(1).children[y].innerHTML;
-    for( let z=0; z<3; z++ )
-        elemanlar[z+6] = document.getElementsByClassName("oyunSatir").item(2).children[z].innerHTML;
-    kazanan();
-}
-
-function kazanan(){
-    let kontrol =   [
-                        [0,1,2],
-                        [3,4,5],
-                        [6,7,8],
-                        [0,4,8],
-                        [2,4,6],
-                        [0,3,6],
-                        [1,4,7],
-                        [2,5,8]
-                    ]
-    for(let i=0; i<8; i++){
-        if(    elemanlar[kontrol[i][0]] == elemanlar[kontrol[i][1]] 
-            && elemanlar[kontrol[i][1]] == elemanlar[kontrol[i][2]] 
-            && elemanlar[kontrol[i][0]] != "" ){
-                fisek();
-                console.log("win");
+new Vue({
+    el: '#app',
+    computed: {
+        turn() {
+            return this.moves.length % 2 === 0 ? 'X' : 'O'
+        },
+        table() {
+            const table = [
+                [null, null, null],
+                [null, null, null],
+                [null, null, null],
+            ]
+            this.moves.map(el => {
+                table[el.indexX][el.indexY] = el.turn
+            })
+            return table
+        }
+    },
+    data() {
+        return {
+            moves: [],
+            score: {
+                X: 0,
+                O: 0,
+                D: 0
             }
+        }
+    },
+    methods: {
+        setMove(indexX, indexY) {
+            if (!!this.table[indexX][indexY]) return
+            this.moves.push({
+                indexX,
+                indexY,
+                turn: this.turn
+            })
+            const winner = this.checkWinner()
+            if (!!winner) {
+                this.win(winner)
+            } else if (this.moves.length === 9) {
+                this.draw()
+            }
+        },
+        checkWinner() {
+            const { table } = this
+            const positions = [
+                // columns
+                [table[0][0], table[0][1], table[0][2]],
+                [table[1][0], table[1][1], table[1][2]],
+                [table[2][0], table[2][1], table[2][2]],
+                // rows
+                [table[0][0], table[1][0], table[2][0]],
+                [table[0][1], table[1][1], table[2][1]],
+                [table[0][2], table[1][2], table[2][2]],
+                // crosses
+                [table[0][0], table[1][1], table[2][2]],
+                [table[0][2], table[1][1], table[2][0]],
+            ]
+            const winner = positions.find(el => !!el[0] && el[0] === el[1] && el[1] === el[2])
+            return !!winner ? winner[0] : null
+        },
+        draw() {
+            this.score['D']++
+            this.reset()
+        },
+        win(winner) {
+            this.score[winner]++
+            this.reset()
+        },
+        reset() {
+            this.moves = []
+        },
+        restart() {
+            this.moves = []
+            this.score = {
+                'X': 0,
+                'O': 0,
+                'D': 0
+            }
+        },
+        turnBack() {
+            this.moves.pop()
+        }
     }
-    console.log("not win");
-    console.log("hareket: " + oyun.hareket);
-    if(oyun.hareket == 9){
-        berabere();
-        console.log("draw");
-    } 
-}
-
-function sifirla(){
-    for( let x=0; x<9; x++ )
-        elemanlar[x] = "";
-    for( let x=0; x<3; x++ ){
-        for( let y=0; y<3; y++ )
-            document.getElementsByClassName("oyunSatir").item(x).children[y].innerHTML = "";
-    }
-
-    oyun.hareket = 0;
-    oyun.sira = 'X'
-
-}
-
-function fisek(){
-    if(oyun.sira == 'X')
-        oyun.o++;
-    else oyun.x++;
-    sifirla();
-    document.getElementById("xWin").innerHTML = oyun.x + " win";
-    document.getElementById("oWin").innerHTML = oyun.o + " win";
-}
-function berabere(){
-    oyun.draws++;
-    sifirla();
-    document.getElementById("draws").innerHTML = oyun.draws + " draws";
-}
+})

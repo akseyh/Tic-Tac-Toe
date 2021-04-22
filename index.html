@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <title>Tic Tac Toe</title>
 </head>
 <body>
@@ -12,30 +13,25 @@
     <div id="app">
         <div id="ustKisim">
             <div class="ustKisim--item">
-                <b style="font-size: .5em;" id="xWin">0 win</b>
+                <b style="font-size: .5em;" id="xWin">{{score['X']}} win</b>
             </div>
             <div class="ustKisim--item">
-                <b style="font-size: .5em;" id="draws">0 draws</b>
+                <b style="font-size: .5em;" id="draws">{{score['D']}} draw</b>
             </div>
             <div class="ustKisim--item">
-                <b style="font-size: .5em;" id="oWin">0 win</b>
+                <b style="font-size: .5em;" id="oWin">{{score['O']}} win</b>
             </div>
         </div>
+        <div class="game-options">
+            <button @click="turnBack" :disabled="!moves.length" class="back-button">Back</button>
+            <button @click="reset" class="clear-button">Clear</button>
+            <button @click="restart" class="restart-button">Restart Game</button>
+        </div>
         <div id="oyun">
-            <div class="oyunSatir">
-                <div class="oyunAlani" id="bir" onclick="tikla(this.id)"></div>
-                <div class="oyunAlani" id="iki" onclick="tikla(this.id)"></div>
-                <div class="oyunAlani" id="uc" onclick="tikla(this.id)"></div>
-            </div>
-            <div class="oyunSatir">
-                <div class="oyunAlani" id="dort" onclick="tikla(this.id)"></div>
-                <div class="oyunAlani" id="bes" onclick="tikla(this.id)"></div>
-                <div class="oyunAlani" id="alti" onclick="tikla(this.id)"></div>
-            </div>
-            <div class="oyunSatir">
-                <div class="oyunAlani" id="yedi" onclick="tikla(this.id)"></div>
-                <div class="oyunAlani" id="sekiz" onclick="tikla(this.id)"></div>
-                <div class="oyunAlani" id="dokuz" onclick="tikla(this.id)"></div>
+            <div class="oyunSatir" v-for="(col, colIndex) in table" :key="'col' + colIndex">
+                <div class="oyunAlani" :class="'row' + colIndex + rowIndex" v-for="(row, rowIndex) in col" :key="'row' + rowIndex" @click="setMove(colIndex, rowIndex)">
+                    {{row}}
+                </div>
             </div>
         </div>
     </div>

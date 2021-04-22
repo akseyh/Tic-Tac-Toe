@@ -58,6 +58,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30px;
 }
 
 .oyunAlani {
@@ -157,7 +158,54 @@
     }
 }
 
+.game-options {
+    /* width: 500px; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+button:active { outline: none }
+button:focus { outline:none }
+.back-button {
+    width: 150px;
+    background: orange;
+    padding: 10px 30px;
+    color: white;
+    border-radius: 20px;
+    border: 0;
+    cursor: pointer;
+}
+.back-button::before {
+    content: '<';
+    margin-right: 10px;
+}
+.back-button:disabled {
+    background: gray;
+    color: rgb(173, 173, 173);
+    cursor: default;
+}
+.clear-button {
+    width: 150px;
+    background: yellowgreen;
+    padding: 10px 30px;
+    color: white;
+    border-radius: 20px;
+    border: 0;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.restart-button {
+    width: 150px;
+    background: red;
+    padding: 10px 30px;
+    color: white;
+    border-radius: 20px;
+    border: 0;
+    cursor: pointer;
+}
+
 
 /* borders */
-#bir, #iki, #uc, #dort, #bes, #alti { border-bottom: 1px solid brown; }
-#bir, #dort, #yedi, #iki, #bes, #sekiz { border-right: 1px solid brown; }
+.row00, .row01, .row02, .row10, .row11, .row12 { border-bottom: 1px solid brown; }
+.row00, .row10, .row20, .row01, .row11, .row21 { border-right: 1px solid brown; }
