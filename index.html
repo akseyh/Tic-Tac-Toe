@@ -13,14 +13,17 @@
     <div id="app">
         <div id="ustKisim">
             <div class="ustKisim--item">
-                <b style="font-size: .5em;" id="xWin">{{score['X']}} win</b>
+                <b style="font-size: .5em;" id="xWin">Player 1:<br/> {{score['X']}}</b>
             </div>
             <div class="ustKisim--item">
-                <b style="font-size: .5em;" id="draws">{{score['D']}} draw</b>
+                <b style="font-size: .5em;" id="draws">Draw:<br/> {{score['D']}}</b>
             </div>
             <div class="ustKisim--item">
-                <b style="font-size: .5em;" id="oWin">{{score['O']}} win</b>
+                <b style="font-size: .5em;" id="oWin">Player 2:<br/> {{score['O']}}</b>
             </div>
+        </div>
+        <div>
+            <b>TURN: {{turn}}</b>
         </div>
         <div class="game-options">
             <button @click="turnBack" :disabled="!moves.length" class="back-button">Back</button>
@@ -29,7 +32,7 @@
         </div>
         <div id="oyun">
             <div class="oyunSatir" v-for="(col, colIndex) in table" :key="'col' + colIndex">
-                <div class="oyunAlani" :class="'row' + colIndex + rowIndex" v-for="(row, rowIndex) in col" :key="'row' + rowIndex" @click="setMove(colIndex, rowIndex)">
+                <div class="oyunAlani" :class="`row${colIndex}${rowIndex}` + ' ' + (row ? 'fill' : `empty ${turn}`)" v-for="(row, rowIndex) in col" :key="'row' + rowIndex" @click="setMove(colIndex, rowIndex)">
                     {{row}}
                 </div>
             </div>
